@@ -3,7 +3,8 @@
 
 
 using namespace std;
-
+int saveBMP(const char *fname, int *v, int mx, int my);
+int *loadBMP(const char *fname, int &mx, int &my);
 int main()
 {
 	string path;
@@ -99,7 +100,7 @@ int *loadBMP(const char *fname, int &mx, int &my)
 	delete[]tmp_buf;
 	return v;
 }
-int saveBMP(const char *fname, int *v, int mx,int my)	// В каждом элементе упаковано все три RGB-байта
+int saveBMP(const char *fname, int *v, int mx,int my)	
 {
 	BMPheader bh;	
 	memset(&bh, 0, sizeof(bh));
