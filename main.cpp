@@ -99,3 +99,49 @@ int *loadBMP(const char *fname, int &mx, int &my)
 	delete[]tmp_buf;
 	return v;
 }
+int saveBMP(const char *fname, int *v, int mx,int my)	// В каждом элементе упаковано все три RGB-байта
+{
+	BMPheader bh;	
+	memset(&bh, 0, sizeof(bh));
+	bh.bfType = 0x4d42;	
+						
+	int mx3 = (3 * mx + 3) & (-4);
+	int filesize = 54 + my*mx3;
+	bh.bfSize = filesize;
+	bh.bfReserved = 0;
+	bh.biPlanes = 1;
+	bh.biSize = 40;
+	bh.bfOffBits = 14 + bh.biSize;
+	bh.biWidth = mx;
+	bh.biHeight = my;
+	bh.biBitCount = 24;
+	bh.biCompression = 0;
+
+	FILE *f = fopen(fname, "wb");
+	if (!f) return -1;
+	size_t res;
+
+	
+	res = fwrite(&bh, 1, sizeof(BMPheader), f);
+	if (res != sizeof(BMPheader)) { fclose(f); return -1; }
+
+	
+	unsigned char *tmp_buf = new unsigned char[mx3*my];
+	
+	unsigned char *ptr = (unsigned char *)v;
+	for (int y = my - 1; y >= 0; y--) {
+		unsigned char *pRow = tmp_buf + mx3*y;
+		for (int x = 0; x< mx; x++) {
+			*(pRow + 2) = *ptr++;
+			*(pRow + 1) = *ptr++;
+			*pRow = *ptr++;
+			pRow += 3;
+			ptr++;
+		}
+	}
+	
+	fwrite(tmp_buf, 1, mx3*my, f);
+	fclose(f);
+	delete[]tmp_buf;
+	return 0;	
+}
