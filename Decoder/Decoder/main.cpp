@@ -1,18 +1,28 @@
+﻿#pragma warning(disable:4996)
+
 #include <iostream>
 #include <string>
 
-
 using namespace std;
+
 int saveBMP(const char *fname, int *v, int mx, int my);
 int *loadBMP(const char *fname, int &mx, int &my);
+
 int main()
 {
-	string path;
-	cout << "Hi! Please enter the path to your picture: \n";
+	string path;												// тут зберігаємо назву .bmp файлу
+	int px, py;													// ширина і висота .bmp файлу													// висота файлу .bmp файлу
+	cout << "Hi! Please enter the path your picture: \n";
 	cin >> path;
+
+	int *v = loadBMP("picture 1.bmp", px, py);					// загружаємо .bmp в програму
+
+
+	delete[] v;													// звільняєм память
 
 	return 0;
 }
+
 typedef unsigned __int16 WORD;
 
 typedef struct {
@@ -37,6 +47,7 @@ typedef struct {
 
 	int    biClrImportant;
 } BMPheader;
+
 int *loadBMP(const char *fname, int &mx, int &my)
 {
 	mx = my = -1;
@@ -73,8 +84,8 @@ int *loadBMP(const char *fname, int &mx, int &my)
 		return NULL;
 	}
 
-	int mx = bh.biWidth;
-	int my = bh.biHeight;
+	mx = bh.biWidth;
+	my = bh.biHeight;
 	int mx3 = (3 * mx + 3) & (-4);
 	unsigned char *tmp_buf = new unsigned  char[mx3*my];
 	res = fread(tmp_buf, 1, mx3*my, f);
@@ -100,6 +111,7 @@ int *loadBMP(const char *fname, int &mx, int &my)
 	delete[]tmp_buf;
 	return v;
 }
+
 int saveBMP(const char *fname, int *v, int mx,int my)	
 {
 	BMPheader bh;	
