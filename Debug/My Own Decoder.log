@@ -1,0 +1,8 @@
+﻿  main.cpp
+d:\semestr_3\practice\my own decoder\main.cpp(51): error C2039: 'getAlpha': is not a member of 'cBitmap'
+  d:\semestr_3\practice\my own decoder\bitmap_class.h(21): note: see declaration of 'cBitmap'
+d:\semestr_3\practice\my own decoder\main.cpp(51): error C2660: 'cBitmap::PutPixel': function does not take 5 arguments
+  bitmap_class.cpp
+d:\semestr_3\practice\my own decoder\bitmap_class.cpp(167): error C2084: function 'int cBitmap::GetRedColor(int,int)' already has a body
+  d:\semestr_3\practice\my own decoder\bitmap_class.cpp(150): note: see previous definition of 'GetRedColor'
+  Generating Code...
