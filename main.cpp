@@ -84,13 +84,16 @@ int main()
 			for (int j = 0; j < 8; j++) {
 				color = test.GetPixel(i, j);
 				redd = Red(color);
-				if (binaryWord[i][j] != redd % 2) {
-					redd++;
-					test.PutPixel(i, j, redd,
-						Green(color),
-						Blue(color),
-						Alpha(color));
+				if (binaryWord[i][j] == 1) {
+					color = color | 0x00000001;
 				}
+				else {
+					color = color & 0xfffffff0;
+				}
+				test.PutPixel(i, j, Red(color),
+					Green(color),
+					Blue(color),
+					Alpha(color));
 			}
 		}
 
