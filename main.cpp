@@ -75,11 +75,6 @@ int main()
 				temp /= 2;
 			}
 			binaryWord[i][0] = 0;
-			//for (int k = 0; k < 4; k++) {
-			//	int ss = binaryWord[i][k];
-			//	binaryWord[i][k] = binaryWord[i][7 - k];
-			//	binaryWord[i][7 - k] = ss;
-			//}
 		}
 
 		//--------------------------------------------------------------------------------------------------------
@@ -107,7 +102,7 @@ int main()
 		test.SaveBitmap(fileq);
 		cout << "************************************************\n";
 		cout << "*           CONGRATULATIONS, YOU WON           *\n";
-		cout << "************************************************\n";
+		cout << "************************************************\n\n";
 
 		//-------------------------------------------------------------------------------------------------------
 
@@ -116,10 +111,6 @@ int main()
 		break;
 
 	case 2:
-		//cout << "Please enter your secret word: \n";
-		//cin >> password;
-		//char* word = strdup(password.c_str());
-
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				color = test.GetPixel(i, j);
@@ -149,6 +140,7 @@ int main()
 		cout << "Here's to you: \n";
 		for (int i = 0; i < 8; i++)
 			cout << output[i];
+		cout << endl << endl;
 		break;
 	default:
 		cout << "Please choose a legit option \n";
